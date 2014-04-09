@@ -2,10 +2,10 @@
   "Various stores used by Estimators"
   (:require
    [immutable-bitset :as bitset]
-   [primitive-math :as math]
-   [potemkin :refer [def-map-type]]
+   [primitive-math :as math :refer [/ * - rem]]
    [screen6.estimator.utils :as utils])
-  (:import [java.util BitSet]))
+  (:import [java.util BitSet])
+  (:refer-clojure :exclude [/ * - rem]))
 
 (defprotocol Estimator
   (cardinality [this]
@@ -45,6 +45,16 @@
 
 (def ^:private bits-per-word 64)
 
+(defn- get-word
+  [^BitSet bitset start stop]
+  ;; Due to peculiar way bitsets are treated we always want to return
+  ;; zero even if there's nothing actually set in the bitset.
+  (-> bitset
+      (.get start stop)
+      (.toLongArray)
+      (first)
+      (or 0)))
+
 (deftype ImmutableBitVector [registers ^long register-size ^short word-size ^long cnt]
 
   clojure.lang.IPersistentMap
@@ -56,9 +66,31 @@
     (let [index (long index)
           bit-index (math/* index word-size)
           register-position (/ bit-index register-size)]
-      ;; if the word spans multiple registers, we'll need to fetch them all
-      (if (math/>= (+ bit-index word-size) register-size)
+      ;; Check if the word we're trying to get is located on single register
+      (if (math/< (math/+ (math/rem bit-index register-size) word-size) register-size)
+        ;; Neat! Now shift the register to the beginning of the word
+        ;; and then truncate it to specified word-size in bits.
+        ;;
+        (get-word (get registers register-position)
+                  bit-index
+                  (+ bit-index word-size))
+        ;; When the word spans multiple registers, we need to fetch
+        ;; them all one by one and then combine into a number. This is
+        ;; quite cumbersome, but should happen fairly rarely, no more
+        ;; often than `word-size/register-size`.
+        ;; TBD: too lazy today
+        (loop [start bit-index
+               stop (math/dec (math/+ register-position register-size))
+               processed-bits 0
+               word 0]
+          (if (math/>= start stop)
+            word
+            (recur start
+                   stop
+                   (math/+ (math/- stop start) processed-bits)
+                   word)))
         )))
+
 
   clojure.lang.Seqable
   (seq [this]
@@ -108,12 +140,3 @@
                        :store {}
                        :m m
                        :alpha (compute-alpha m)})))
-
-;; (defn sparse
-;;   [precision]
-;;   (let [log2m precision
-;;         m (math/<< 1 log2m)
-;;         m-bit-mask (math/dec m)
-;;         alpha (compute-alpha m)
-;;         p-w-max-mask (math/- (math/<< 1 (math/- (math/- (math/<< 1 register-width) 1) 1)) 1)]
-;;     (SparseProbabilistic. log2m p-w-max-mask m-bit-mask alpha m {} {})))

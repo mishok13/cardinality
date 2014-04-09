@@ -13,11 +13,7 @@
   (merge* [this other])
   (cardinality* [this]))
 
-(defn encode-value
-  [^long value precision sparse-precision]
-  (let [higher-bits-mask ]))
-
-(defrecord HyperLogLog [precision sparse-precision]
+(defrecord HyperLogLog [storage algorithm explicit-threshold]
 
   EstimatorProtocol
 
@@ -29,19 +25,12 @@
       ::explicit (if (> (count storage) explicit-threshold)
                    ;; promote to sparse
                    (-> this
-                       (assoc :storage (reduce store/add (store/sparse) storage))
+                       (assoc :storage (reduce store/add (store/lazy-map-based) storage))
                        (assoc :algorithm ::sparse)
                        (add* value))
                    ;; just add value
                    (assoc this :storage (conj storage value)))
-      ::sparse (if (> (count storage) explicit-threshold)
-                 ;; promote to sparse
-                 (-> this
-                     (assoc :storage (reduce store/add (store/sparse) storage))
-                     (assoc :algorithm ::sparse)
-                     (add* value))
-                 ;; just add value
-                 (assoc this :storage (conj storage value)))))
+      ::sparse (assoc this :storage (store/add storage value))))
 
   (cardinality* [this]
     (case algorithm

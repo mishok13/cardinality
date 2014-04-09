@@ -11,6 +11,7 @@
             [alembic.still :as alembic]))
 
 (def add-dep alembic/distill)
+(def clfmt cl-format)
 
 (def reload-project alembic/load-project)
 
