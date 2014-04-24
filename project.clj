@@ -1,4 +1,4 @@
-(defproject screen6.estimator "0.1.0-SNAPSHOT"
+(defproject io.screen6/cardinality "0.1.0-SNAPSHOT"
   :description ""
   :license {:name "MIT"
             :url "http://opensource.org/licenses/MIT"}
