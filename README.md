@@ -7,7 +7,7 @@ Experiments in writing cardinality estimators.
 
 This is a work in progress. This library is NOT used in production
 systems by Screen6 and we can't encourage you to use it in production
-either. We don't forbid it either. :)
+either. We don't forbid it though. ;)
 
 # Current goals
 
