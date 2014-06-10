@@ -1,3 +1,3 @@
-# Introduction to screen6.estimator
+# Introduction to estimators
 
-TODO: write [great documentation](http://jacobian.org/writing/great-documentation/what-to-write/)
+TODO: write [great documentation](http://jacobian.org/writing/what-to-write/)
