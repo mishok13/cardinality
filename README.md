@@ -1,5 +1,5 @@
-io.screen6/cardinality
-======================
+io.screen6/estimators
+=====================
 
 Experiments in writing cardinality estimators.
 
@@ -8,6 +8,11 @@ Experiments in writing cardinality estimators.
 This is a work in progress. This library is NOT used in production
 systems by Screen6 and we can't encourage you to use it in production
 either. We don't forbid it though. ;)
+
+# Installation
+
+Leiningen dependency: `[io.screen6/estimators "0.1.0"]`
+[![Build Status](https://travis-ci.org/screen6/cardinality.png?branch=master)](https://travis-ci.org/screen6/cardinality)
 
 # Current goals
 
