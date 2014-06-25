@@ -2,7 +2,7 @@
   (:require
    [midje.sweet :refer :all]
    [io.screen6.cardinality.streamlibhll :refer :all]
-   [io.screen6.cardinality.protocol :refer [present cardinality union]]))
+   [io.screen6.cardinality.estimator :refer [present cardinality union]]))
 
 (tabular
  (fact

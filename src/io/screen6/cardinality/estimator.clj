@@ -1,4 +1,4 @@
-(ns io.screen6.cardinality.protocol)
+(ns io.screen6.cardinality.estimator)
 
 (defprotocol EstimatorProtocol
   (present [this value]
