@@ -2,6 +2,7 @@
   :description "Cardinality estimation API"
   :license {:name "MIT"
             :url "http://opensource.org/licenses/MIT"}
+  :url "https://github.com/screen6/cardinality"
   :profiles {:1.6 {:dependencies [[org.clojure/clojure "1.6.0"]]}
              :1.4 {:dependencies [[org.clojure/clojure "1.4.0"]]}
              :dev {:plugins [[lein-midje "3.1.1"]]
