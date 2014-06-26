@@ -9,11 +9,11 @@ This is a work in progress. This library is NOT used in production
 systems by Screen6 and we can't encourage you to use it in production
 either. We don't forbid it though. ;)
 
-# Installation
+## Latest version
 
-Leiningen dependency: `[io.screen6/estimators "0.1.0"]`
+[![Clojars Project](http://clojars.org/io.screen6/cardinality/latest-version.svg)](http://clojars.org/io.screen6/cardinality)
 
-Clojars latest build: [![Clojars Project](http://clojars.org/io.screen6/cardinality/latest-version.svg)](http://clojars.org/io.screen6/cardinality)
+## Build status
 
 [![Build Status](https://travis-ci.org/screen6/cardinality.png?branch=master)](https://travis-ci.org/screen6/cardinality)
 
