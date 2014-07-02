@@ -16,10 +16,6 @@ either. We don't forbid it though. ;)
 
 [![Clojars Project](http://clojars.org/io.screen6/cardinality/latest-version.svg)](http://clojars.org/io.screen6/cardinality)
 
-## Build status
-
-[![Build Status](https://travis-ci.org/screen6/cardinality.png?branch=master)](https://travis-ci.org/screen6/cardinality)
-
 # Current goals
 
  The end goal is to have at least the following:
