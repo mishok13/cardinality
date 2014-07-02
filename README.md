@@ -30,3 +30,5 @@ either. We don't forbid it though. ;)
   proposed and used by AggregateKnowledge
 * [HyperLogLog++](http://static.googleusercontent.com/external_content/untrusted_dlcp/research.google.com/en/us/pubs/archive/40671.pdf)
   implementation
+
+[badge-license]: https://img.shields.io/badge/license-MIT-green.svg
