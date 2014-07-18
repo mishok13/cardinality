@@ -10,9 +10,9 @@
   (cardinality (reduce present ?estimator ?values)) => (roughly ?result (* ?error ?result)))
  ?estimator ?values ?result ?error
  (estimator 12) nil 0 0.0
- (estimator 12) (range 1000000) 1000000 0.025
- (estimator 15) (range 1000000) 1000000 0.025
- (estimator 12) (take 1000000 (cycle (range 10000))) 10000 0.05)
+ (estimator 12) (range 100000) 100000 0.025
+ (estimator 15) (range 100000) 100000 0.025
+ (estimator 12) (take 100000 (cycle (range 10000))) 10000 0.05)
 
 (fact
  "Union doesn't mutate existing values"
