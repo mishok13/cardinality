@@ -1,5 +1,6 @@
 [![License MIT][badge-license]](http://opensource.org/licenses/MIT)
 [![Build Status](https://travis-ci.org/screen6/cardinality.png?branch=master)](https://travis-ci.org/screen6/cardinality)
+[![Coverage Status](https://img.shields.io/coveralls/screen6/cardinality.svg)](https://coveralls.io/r/screen6/cardinality)
 
 io.screen6/estimators
 =====================
