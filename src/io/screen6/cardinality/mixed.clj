@@ -35,7 +35,6 @@
   (present [this value] (conj this value))
   (cardinality [this] (count this))
   (union [this other]
-    (prn this other)
     (assert (or (set? other) (nil? other)))
     (clojure.set/union this other)))
 
