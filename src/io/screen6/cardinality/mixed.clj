@@ -29,12 +29,13 @@
 (extend-protocol e/EstimatorProtocol
   nil
   (present [_ value] #{value})
-  (cardinality [_] nil)
+  (cardinality [_] 0)
   (union [_ other] other)
   clojure.lang.IPersistentSet
   (present [this value] (conj this value))
   (cardinality [this] (count this))
   (union [this other]
+    (prn this other)
     (assert (or (set? other) (nil? other)))
     (clojure.set/union this other)))
 
@@ -52,12 +53,12 @@
   (union [this other]
     (case [mode (:mode other)]
       [:hll :hll] (assoc this :estimator (e/union estimator (:estimator other)))
-      [:hll :set] (assoc this :estimator (e/union estimator (set->hll (:estimator other))))
-      [:set :hll] (assoc this :estimator (e/union (set->hll estimator) (:estimator other))
+      [:hll :set] (assoc this :estimator (e/union estimator (set->hll (:estimator other) precision)))
+      [:set :hll] (assoc this :estimator (e/union (set->hll estimator precision) (:estimator other))
                          :mode :hll)
-      [:set :set] (let [[mode estimator] (upgrade (e/union this other) precision)]
+      [:set :set] (let [[mode estimator] (upgrade mode (e/union (:estimator this) (:estimator other)) precision)]
                     (assoc this :estimator estimator :mode mode)))))
 
 (defn estimator
   [precision]
-  (->MixedEstimator #{} :set precision))
+  (->MixedEstimator nil :set precision))
