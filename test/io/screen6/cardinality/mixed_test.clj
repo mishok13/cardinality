@@ -26,5 +26,9 @@
     (:mode estimator) => ?mode))
  ?left ?right ?result ?error ?mode
  (estimator 10) (estimator 10) 0 0.0 :set
+ (reduce present (estimator 10) (range 100)) (reduce present (estimator 10) (range 100)) 100 0.0 :set
+ (reduce present (estimator 10) (range 300)) (reduce present (estimator 10) (range 300 600)) 600 0.025 :hll
  (reduce present (estimator 10) (range 1000)) (reduce present (estimator 10) (range 100)) 1000 0.025 :hll
- (reduce present (estimator 10) (range 1000)) (reduce present (estimator 10) (range 1000 1100)) 1100 0.025 :hll)
+ (reduce present (estimator 10) (range 1000)) (reduce present (estimator 10) (range 1000 1100)) 1100 0.025 :hll
+ (reduce present (estimator 10) (range 1000)) (reduce present (estimator 10) (range 1000)) 1000 0.025 :hll
+ (reduce present (estimator 10) (range 1000)) (reduce present (estimator 10) (range 1000 2000)) 2000 0.025 :hll)
