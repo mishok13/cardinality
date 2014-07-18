@@ -21,9 +21,12 @@
 (tabular
  (fact
   "Mixed mode estimator handles union correctly"
-  (let [estimator (union ?left ?right)]
+  (let [[estimator inverted] [(union ?left ?right) (union ?right ?left)]]
     (cardinality estimator) => (roughly ?result (* ?error ?result))
-    (:mode estimator) => ?mode))
+    ;; Checking that union operation is symmetric and immutable
+    (cardinality inverted) => (roughly ?result (* ?error ?result))
+    (:mode estimator) => ?mode
+    (:mode inverted) => ?mode))
  ?left ?right ?result ?error ?mode
  (estimator 10) (estimator 10) 0 0.0 :set
  (reduce present (estimator 10) (range 100)) (reduce present (estimator 10) (range 100)) 100 0.0 :set
