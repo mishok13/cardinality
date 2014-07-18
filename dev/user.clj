@@ -55,10 +55,9 @@ development."
 
 (defn perfect-cutoff-for-mixed-mode
   [precision]
-  (let [estimators (map (fn [n] (mapv (fn [estimator] (populate (estimator precision) n))
-                                     [mixed/estimator streamlibhll/estimator]))
-                        (iterate inc 1))]
-    (->> estimators
-         (filter (fn [[m h]] (> (count (nippy/freeze m)) (count (nippy/freeze h)))))
-         (ffirst)
-         (e/cardinality))))
+  (->> (iterate inc 1)
+       (map (fn [n] (mapv (fn [estimator] (populate (estimator precision) n))
+                         [mixed/estimator streamlibhll/estimator])))
+       (filter (fn [[m h]] (> (count (nippy/freeze m)) (count (nippy/freeze h)))))
+       (ffirst)
+       (e/cardinality)))
