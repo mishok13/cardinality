@@ -3,8 +3,7 @@
   (:require
    [io.screen6.cardinality.estimator :as estimator])
   (:import
-   [com.clearspring.analytics.stream.cardinality HyperLogLog])
-  (:refer-clojure :exclude [merge]))
+   [com.clearspring.analytics.stream.cardinality HyperLogLog]))
 
 (defrecord Estimator [hll precision]
 
